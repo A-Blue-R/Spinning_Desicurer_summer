@@ -26,6 +26,11 @@ void loop() {
       int time = command.substring(9).toInt(); // Get the duration from the command
       moveMotor(backwardPin, forwardPin, time);
     }
+        if (command.endsWith(" LED ON")) {
+      analogWrite(ledPin, 255);  // Set LED to full brightness
+    } else if (command.endsWith(" LED OFF")) {
+      analogWrite(ledPin, 0);  // Turn off the LED
+    }
   }
 }
 
