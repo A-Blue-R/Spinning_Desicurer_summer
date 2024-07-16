@@ -1,0 +1,18 @@
+import serial
+import time
+
+# Establish a connection to the Arduino
+ser = serial.Serial('COM3', 9600)  # Replace 'COM_PORT' with your actual COM port
+time.sleep(2)  # Wait for the connection to establish
+
+def send_command(command):
+    ser.write((command + '\n').encode())
+
+# Example usage
+send_command("FORWARD 5")  # Move forward for 5 seconds
+time.sleep(6)  # Wait a bit longer than the movement duration
+
+send_command("BACKWARD 3")  # Move backward for 3 seconds
+time.sleep(4)  # Wait a bit longer than the movement duration
+
+ser.close()  # Close the serial connection
