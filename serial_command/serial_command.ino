@@ -1,7 +1,6 @@
 int ledPin = 5; // PWM pin for the LED
-int forwardPin = 9; // Motor forward pin
-int backwardPin = 10; // Motor backward pin
-int motorSpeedPin = 11; // PWM pin for motor speed control
+int motorDirectionPin = 12; // Motor direction pin (HIGH for one direction, LOW for reverse)
+int motorSpeedPin = 10; // PWM pin for motor speed control
 
 unsigned long startMillis; // Start time for motor actions
 unsigned long ledStartMillis; // Start time for LED actions
@@ -12,8 +11,7 @@ bool ledOn = false; // State of the LED
 
 void setup() {
   pinMode(ledPin, OUTPUT);
-  pinMode(forwardPin, OUTPUT);
-  pinMode(backwardPin, OUTPUT);
+  pinMode(motorDirectionPin, OUTPUT);
   pinMode(motorSpeedPin, OUTPUT);
   Serial.begin(9600);
 }
@@ -27,13 +25,13 @@ void loop() {
     if (command.startsWith("FORWARD ")) {
       int index = command.indexOf(" LED ");
       duration = command.substring(8, index).toInt() * 1000; // Convert to milliseconds
-      startMotor(forwardPin, backwardPin);
+      startMotor(HIGH);
       ledDuration = command.substring(index + 5).toInt() * 1000; // Extract LED duration
       startLED();
     } else if (command.startsWith("BACKWARD ")) {
       int index = command.indexOf(" LED ");
       duration = command.substring(9, index).toInt() * 1000; // Convert to milliseconds
-      startMotor(backwardPin, forwardPin);
+      startMotor(LOW);
       ledDuration = command.substring(index + 5).toInt() * 1000; // Extract LED duration
       startLED();
     }
@@ -50,17 +48,14 @@ void loop() {
   }
 }
 
-void startMotor(int pinHigh, int pinLow) {
+void startMotor(bool direction) {
+  digitalWrite(motorDirectionPin, direction); // Set direction based on HIGH or LOW
   analogWrite(motorSpeedPin, 255); // Set motor speed to maximum
-  digitalWrite(pinHigh, HIGH);
-  digitalWrite(pinLow, LOW);
   startMillis = millis(); // Record start time
   motorRunning = true; // Set motor state to running
 }
 
 void stopMotor() {
-  digitalWrite(forwardPin, LOW);
-  digitalWrite(backwardPin, LOW);
   analogWrite(motorSpeedPin, 0); // Stop the motor
   motorRunning = false; // Set motor state to not running
 }
