@@ -15,6 +15,9 @@ def send_command(movement, motor_duration, led_duration):
 one_minute = 6
 two_minute = 12 
 
+print("Press spacebar to Start Procedure...")
+keyboard.wait('space')  # This will pause the script until spacebar is pressed
+
 send_command("FORWARD", two_minute, 0)  # Move forward for 5 seconds and LED on for 3 seconds
 
 time.sleep(two_minute)
