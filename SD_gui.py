@@ -36,7 +36,7 @@ class App:
         self.status.pack(pady=20)
 
         # Establish a connection to the Arduino
-        self.ser = serial.Serial('/dev/ttyACM0', 9600)  # Adjust as per your actual COM port
+        self.ser = serial.Serial('COM3', 9600)  # Adjust as per your actual COM port
         time.sleep(2)  # Wait for the connection to establish
 
     def send_command(self, movement, motor_duration, led_duration):
@@ -45,9 +45,9 @@ class App:
         self.status.config(text=f"Command sent: {command}")
 
     def protocol(self):
-        self.send_command("FORWARD", 12, 0)  # two_minute duration
+        self.send_command("FORWARD", 120, 0)  # two_minute duration
         time.sleep(13)
-        self.send_command("FORWARD", 6, 6)  # one_minute duration and LED on
+        self.send_command("FORWARD", 60, 60)  # one_minute duration and LED on
         time.sleep(7)
         self.continue_btn.config(state=tk.NORMAL)  # Enable continue button
         self.status.config(text="Click Continue to proceed...")
@@ -62,9 +62,9 @@ class App:
         Thread(target=self.continue_steps).start()
 
     def continue_steps(self):
-        self.send_command("FORWARD", 6, 6)  # one_minute duration and LED on
+        self.send_command("FORWARD", 60, 60)  # one_minute duration and LED on
         time.sleep(7)
-        self.send_command("FORWARD", 12, 0)  # two_minute duration
+        self.send_command("FORWARD", 120, 0)  # two_minute duration
         time.sleep(13)
         self.status.config(text="Finished")
         self.start_btn.config(state=tk.NORMAL)  # Re-enable start button for a new cycle

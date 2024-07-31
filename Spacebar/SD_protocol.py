@@ -12,8 +12,8 @@ def send_command(movement, motor_duration, led_duration):
     print(f"Command sent: {command}")  # Print the command for debugging
 
 # SD Protocol
-one_minute = 6
-two_minute = 12 
+one_minute = 60
+two_minute = 120 
 
 print("Press spacebar to Start Procedure...")
 keyboard.wait('space')  # This will pause the script until spacebar is pressed
