@@ -61,6 +61,12 @@ class App:
         time.sleep(30.1)
         self.send_command("FORWARD", 30, 30)
         time.sleep(30.1)
+        self.send_command("FORWARD", 30, 30)
+        time.sleep(30.1)
+        self.send_command("FORWARD", 30, 30)
+        time.sleep(30.1)
+        self.send_command("FORWARD", 30, 30)  
+        time.sleep(30.1)
         self.send_command("FORWARD", 0, 0)
         time.sleep(0.1)
         self.continue_btn.config(state=tk.NORMAL)  # Enable continue button
@@ -76,6 +82,12 @@ class App:
         Thread(target=self.continue_steps).start()
 
     def continue_steps(self):
+        self.send_command("FORWARD", 30, 30)  
+        time.sleep(30.1)
+        self.send_command("FORWARD", 30, 30)  
+        time.sleep(30.1)
+        self.send_command("FORWARD", 30, 30)  
+        time.sleep(30.1)
         self.send_command("FORWARD", 30, 30)  
         time.sleep(30.1)
         self.send_command("FORWARD", 30, 30)  
