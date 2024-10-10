@@ -51,24 +51,10 @@ class App:
         self.status.config(text=f"Command sent: {command}")
 
     def protocol(self):
-        self.send_command("FORWARD", 30, 0)  
-        time.sleep(30.1)
-        self.send_command("FORWARD", 30, 0)  
-        time.sleep(30.1)
-        self.send_command("FORWARD", 30, 0)  
-        time.sleep(30.1)
-        self.send_command("FORWARD", 30, 30)  
-        time.sleep(30.1)
-        self.send_command("FORWARD", 30, 30)
-        time.sleep(30.1)
-        self.send_command("FORWARD", 30, 30)
-        time.sleep(30.1)
-        self.send_command("FORWARD", 30, 30)
-        time.sleep(30.1)
-        self.send_command("FORWARD", 30, 30)  
-        time.sleep(30.1)
-        self.send_command("FORWARD", 0, 0)
-        time.sleep(0.1)
+        self.send_command("FORWARD", 30, 0)  # two_minute duration
+        time.sleep(121)
+        self.send_command("FORWARD", 60, 60)  # one_minute duration and LED on
+        time.sleep(61)
         self.continue_btn.config(state=tk.NORMAL)  # Enable continue button
         self.status.config(text="Click Continue to proceed...")
 
@@ -82,24 +68,10 @@ class App:
         Thread(target=self.continue_steps).start()
 
     def continue_steps(self):
-        self.send_command("FORWARD", 30, 30)  
-        time.sleep(30.1)
-        self.send_command("FORWARD", 30, 30)  
-        time.sleep(30.1)
-        self.send_command("FORWARD", 30, 30)  
-        time.sleep(30.1)
-        self.send_command("FORWARD", 30, 30)  
-        time.sleep(30.1)
-        self.send_command("FORWARD", 30, 30)  
-        time.sleep(30.1)
-        self.send_command("FORWARD", 30, 0)  
-        time.sleep(30.1)
-        self.send_command("FORWARD", 30, 0)  
-        time.sleep(30.1)
-        self.send_command("FORWARD", 30, 0)  
-        time.sleep(30.1)
-        self.send_command("FORWARD", 0, 0)  
-        time.sleep(0.1)
+        self.send_command("FORWARD", 60, 60)
+        time.sleep(61)
+        self.send_command("FORWARD", 120, 0)
+        time.sleep(121)
         self.status.config(text="Finished")
         self.start_btn.config(state=tk.NORMAL)
 
